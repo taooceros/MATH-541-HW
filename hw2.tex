@@ -1,0 +1,162 @@
+\pdfcompresslevel=0
+\pdfobjcompresslevel=0
+
+\input{config.tex}
+
+%: TITLE
+
+\begin{document}
+\bibliographystyle{acm}
+
+\begin{center}
+	\framebox{\parbox{\linewidth}{\centering
+	{\bf{Homework 2}}\\
+	MATH 541: Abstract Algebra 1\\
+	Spring 2023 \\[\baselineskip]
+	{\sc Hongtao Zhang}}} %at \href{mailto:ewbates@wisc.edu}{\nolinkurl{ewbates@wisc.edu}}.}}
+\end{center}
+
+Sec. 1.4: 10
+
+Sec. 1.6: 14, 18, 24, 25(a)(b)
+
+Sec. 1.7: 16, 17
+%: BODY
+
+\section*{1.4}
+
+\subsection*{10}
+
+\begin{enumerate}
+	\item \begin{proof}
+		      $$
+			      \begin{pmatrix}
+				      a_1 & b_1 \\
+				      0   & c_1
+			      \end{pmatrix}
+			      \begin{pmatrix}
+				      a_2 & b_2 \\
+				      0   & c_2
+			      \end{pmatrix} =
+			      \begin{pmatrix}
+				      a_1a_2 & a_1b_2+b_1c_2 \\
+				      0      & c_1c_2
+			      \end{pmatrix}
+		      $$
+
+		      Because $a_1, a_2 \neq 0$, so $a_1a_2\neq 0$, same for $c_1,c_2$.
+		      Therefore, G is closed under matrix mul.
+	      \end{proof}
+	\item \begin{proof}
+		      $$
+			      \begin{pmatrix}
+				      a & b \\
+				      0 & c
+			      \end{pmatrix}^{-1} =
+			      \begin{pmatrix}
+				      1/a & -b/(ac) \\
+				      0   & 1/c
+			      \end{pmatrix}
+		      $$
+	      \end{proof}
+
+	      Because $a,c\neq 0$, so all entries are well defined within $\R$, which means it is closed.
+
+	\item Because any matrix operation defined in $GL_2(\R)$ is defined in $G$,
+	      and $G$ is clearly closed under $addition$ and $subtraction$,
+	      and $G$ is a subset of $GL_2(\R)$ where the left lower entry is $0$, and $a,c \neq 0$,
+	      so $G$ is a subgroup of $GL_2(\R)$.
+	\item Follow the similar steps from above, it suffices to check whether the new set $G'$ is closed under multiplication and inverse.
+	      \begin{proof}
+		      $$
+			      \begin{pmatrix}
+				      a_1 & b_1 \\
+				      0   & a_1
+			      \end{pmatrix}
+			      \begin{pmatrix}
+				      a_2 & b_2 \\
+				      0   & a_2
+			      \end{pmatrix} =
+			      \begin{pmatrix}
+				      a_1a_2 & a_1b_2+a_2b_1 \\
+				      0      & a_1a_2
+			      \end{pmatrix}
+		      $$
+		      The left top entry and the right bottom entry are the same,
+		      which indicates that matrix multiplication is closed in $G'$.
+
+		      $$
+			      \begin{pmatrix}
+				      a & b \\
+				      0 & a
+			      \end{pmatrix}^{-1}=
+			      \begin{pmatrix}
+				      \frac{1}{a} & -\frac{b}{a^2} \\
+				      0           & \frac{1}{a}
+			      \end{pmatrix}
+		      $$
+
+		      which is also inside $G'$, therefore $G'$ is a subgroup of $G$.
+
+		      Therefore, $G'$ is a subgroup of $GL_2(\R)$.
+	      \end{proof}
+\end{enumerate}
+
+\section*{1.6}
+
+\subsection*{14}
+
+\subsubsection*{Kernel is a subgroup}
+
+\begin{proof}
+	Denote operation on $G$ as $\star_G$,
+	mutatis mutandis for $\star_H$.
+
+	Consider two element $x,y \in kernel(H)$.
+
+	$$
+		\phi(x \star_G y) = \phi(x) \star_H \phi(y) = \one \star_H \one = \one
+	$$
+
+	Therefore $x \star_G y$ is also in $kernel(H)$.
+
+	$$
+		\phi(x \star_G x^{-1}) = \phi(x) \star_H \phi(x^{-1}) = \one_H \star_H \phi(x^{-1}) = \one_H \implies \phi(x^{-1}) = \one_H
+	$$
+
+	Therefore $x^{-1}$ is also in $kernel(H)$.
+
+	Therefore, $kernel(H)$ is a subgroup of $G$.
+\end{proof}
+
+\subsubsection*{injective iff kernel is the identity subgroup of G}
+
+\begin{proof}
+	First prove that $\phi$ is injective if the kernel of $\phi$ is the identity subgroup of $G$.
+
+	$$
+		kernel(H) = \one_G
+	$$
+
+	Assume $\phi$ is not injective, i.e. there exists two element $a,b \in G$ that $\phi(a) = \phi(b)$ but $a\neq b$.
+	$$
+		\phi(a \star a^{-1} \star b) = \phi(b) = \phi(a) = \phi(a) \star \phi(a^{-1} \star b) \implies \phi(a^{-1} \star b) = \one
+	$$
+
+	However, we know that only $\phi(\one) = \one$, but $a\neq b$, so $a^{-1} \star b \neq \one$, which is a contradiction.
+
+	Then prove If $\phi$ is injective, then the kernel is the identity subgroup.
+
+	We know that the identity subgroup of G always map to the identity subgroup of H,
+	so by injectivity, it is the only subgroup lies in the kernel.
+
+
+\end{proof}
+
+
+\end{document}
+
+
+
+
+
