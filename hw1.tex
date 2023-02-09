@@ -1,0 +1,404 @@
+%: CLASS FILE
+
+\documentclass[11pt]{article}
+%\documentclass[11pt,reqno]{amsart} % AMS article style with right equation numbering
+
+
+%: PACKAGES
+
+\usepackage{graphicx}
+
+% sets margins
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+
+% gives more color definitions
+\usepackage{xcolor}
+
+% gives optional arguments to list environments
+\usepackage{enumitem}
+
+\usepackage{microtype}
+
+% uncomment to begin paragraphs with an empty line rather than an indent
+% \usepackage[parfill]{parskip}
+
+\usepackage{amsmath, amsthm, amssymb, tikz, mathtools, array, mathrsfs, tensor}
+
+% must be loaded after ams packages
+% gives various integral symbols: see http://ctan.math.illinois.edu/macros/latex/contrib/esint/esint.pdf
+\usepackage{esint}
+
+% creates command \one for blackboard 1 to use for indicator functions
+\usepackage{dsfont}
+	\newcommand{\one}{\mathds{1}}
+
+% \framebox{$ stuff $} will frame things in line.
+% \Aboxed{$ stuff $} will frame things in align environment.
+\usepackage{framed}
+
+% always have this as the last package listed.
+\usepackage{hyperref}
+	\hypersetup{hypertexnames=false,colorlinks=true,linkcolor=blue,citecolor=black,urlcolor=blue}
+	
+	
+%: SETTINGS
+
+% uncomment to align environments to be split over page breaks
+%\allowdisplaybreaks
+
+%: COMMANDS
+
+% equation shortcuts
+\newcommand{\eq}[1]{\begin{align*} #1 \end{align*}}
+\newcommand{\eeq}[1]{\begin{align} \begin{split} #1 \end{split} \end{align}}
+
+% shortcut for stacking equation references over relations
+% usage: \stackref{LABEL}{SYMBOL}
+\newcommand{\stackref}[2]{\stackrel{\mbox{\footnotesize{\eqref{#1}}}}{#2}}
+\newcommand{\stackrefp}[2]{\stackrel{\phantom{\mbox{\footnotesize{\eqref{#1}}}}}{#2}}
+
+% variable Greek letters
+\def\eps{\varepsilon}
+\def\vphi{\varphi}
+
+% blackboard letters
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\S}{\mathbb{S}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% calligraphic letters
+\renewcommand{\AA}{\mathcal{A}}
+\newcommand{\BB}{\mathcal{B}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\DD}{\mathcal{D}}
+\newcommand{\EE}{\mathcal{E}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\GG}{\mathcal{G}}
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\II}{\mathcal{I}}
+\newcommand{\JJ}{\mathcal{J}}
+\newcommand{\KK}{\mathcal{K}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\PP}{\mathcal{P}}
+\newcommand{\QQ}{\mathcal{Q}}
+\newcommand{\RR}{\mathcal{R}}
+\renewcommand{\SS}{\mathcal{S}}
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\UU}{\mathcal{U}}
+\newcommand{\VV}{\mathcal{V}}
+\newcommand{\WW}{\mathcal{W}}
+\newcommand{\XX}{\mathcal{X}}
+\newcommand{\YY}{\mathcal{Y}}
+\newcommand{\ZZ}{\mathcal{Z}}
+
+% script letters
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\BBB}{\mathcal{B}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\DDD}{\mathcal{D}}
+\newcommand{\EEE}{\mathcal{E}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\GGG}{\mathcal{G}}
+\newcommand{\HHH}{\mathcal{H}}
+\newcommand{\III}{\mathcal{I}}
+\newcommand{\JJJ}{\mathcal{J}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\LLL}{\mathcal{L}}
+\newcommand{\MMM}{\mathcal{M}}
+\newcommand{\NNN}{\mathcal{N}}
+\newcommand{\OOO}{\mathcal{O}}
+\newcommand{\PPP}{\mathcal{P}}
+\newcommand{\QQQ}{\mathcal{Q}}
+\newcommand{\RRR}{\mathcal{R}}
+\newcommand{\SSS}{\mathcal{S}}
+\newcommand{\TTT}{\mathcal{T}}
+\newcommand{\UUU}{\mathcal{U}}
+\newcommand{\VVV}{\mathcal{V}}
+\newcommand{\WWW}{\mathcal{W}}
+\newcommand{\XXX}{\mathcal{X}}
+\newcommand{\YYY}{\mathcal{Y}}
+\newcommand{\ZZZ}{\mathcal{Z}}
+
+% inner product 
+% usage: \iprod{left}{right}
+\newcommand{\iprod}[2]{\langle #1,\, #2\rangle}
+
+% bold math font (still in italics) 
+% usage: {\vc CONTENT}
+\newcommand{\vc}[1]{{\boldsymbol #1}}
+
+% widetilde and widehat shortcuts
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\wh}[1]{\widehat{#1}}
+
+% math operators with subcripts
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Ent}{Ent}
+
+% math operators with subtext
+\DeclareMathOperator*{\esssup}{ess\,sup}
+\DeclareMathOperator*{\essinf}{ess\,inf}
+
+% conditional statements (size of delimiter as an optional command)
+\newcommand{\givenc}[3][]{#1\{ #2 \: #1| \: #3 #1\}} % with braces
+\newcommand{\givenk}[3][]{#1[ #2 \: #1| \: #3 #1]} % with brackets
+\newcommand{\givenp}[3][]{#1( #2 \: #1| \: #3 #1)} % with parentheses
+\newcommand{\givena}[3][]{#1\langle #2 \: #1| \: #3 #1\rangle} % with angle brackets
+
+% common math text
+\DeclareMathOperator{\e}{e} % exponential
+\newcommand{\cc}{\mathrm{c}} % for set complements and "critical" subscripts
+\newcommand{\dd}{\mathrm{d}} % for differentials
+\newcommand{\Exp}{\mathrm{Exp}} % for exponential distribution
+
+% floor and ceiling functions
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+%: ENVIRONMENTS
+
+% exercise environment
+\newenvironment{exercise}[1]
+	{\noindent \textbf{#1:}}
+	{\par \vspace{0.5\baselineskip}}
+	
+% solution environment
+\newenvironment{solution}[1][\unskip]
+	{\noindent \textbf{Solution #1:} }
+	{\qed \pagebreak}
+	
+\newenvironment{solutionn}[1][\unskip]
+	{\noindent \textbf{Solution #1:} }
+	{\qed \\}	
+
+
+%: TITLE
+
+\begin{document}
+\bibliographystyle{acm}
+
+\begin{center}
+	\framebox{\parbox{\linewidth}{\centering
+	{\bf{Homework 1}}\\
+	MATH 541: Abstract Algebra 1\\
+	Spring 2023 \\[\baselineskip]
+	{\sc Hongtao Zhang}}} %at \href{mailto:ewbates@wisc.edu}{\nolinkurl{ewbates@wisc.edu}}.}}
+\end{center}
+
+
+%: BODY
+
+Section 1.1: 1, 7
+
+Section 1.2: 3, 4, 18
+
+Section 1.3: 1, 5
+
+\section*{1.1.1}
+
+Clearly
+$$
+\begin{pmatrix} 
+	0 & 0\\
+	0 & 0 
+\end{pmatrix},
+\begin{pmatrix}
+	1 & 0\\
+	0 & 1
+\end{pmatrix},
+\begin{pmatrix}
+	1 & 1\\
+	1 & 1 
+\end{pmatrix}  
+$$
+are satisfying the condtion.
+
+Also, $M$ itself must also satisfy the condition.
+
+$$
+\begin{pmatrix}
+	1 & 1 \\
+	0 & 1 \\
+\end{pmatrix}
+\begin{pmatrix}
+	1 & 1 \\
+	1 & 0 \\
+\end{pmatrix} = 
+\begin{pmatrix}
+	2 & 1 \\
+	1 & 0 \\
+\end{pmatrix}
+$$
+
+$$
+\begin{pmatrix}
+	1 & 1 \\
+	1 & 0 \\
+\end{pmatrix}
+\begin{pmatrix}
+	1 & 1 \\
+	0 & 1 \\
+\end{pmatrix} = 
+\begin{pmatrix}
+	1 & 2 \\
+	1 & 1 \\
+\end{pmatrix}
+$$
+
+Therefore it is not in B.
+
+$$
+\begin{pmatrix}
+	0 & 1 \\
+	1 & 0 \\
+\end{pmatrix}M=
+\begin{pmatrix}
+	1 & 1 \\in
+	1 & 0 \\
+\end{pmatrix}
+$$
+
+$$
+M\begin{pmatrix}
+	0 & 1 \\
+	1 & 0 \\
+\end{pmatrix}=M
+$$
+
+Therefore, it is not in B.
+
+\section*{1.1.7}
+
+\begin{proof}
+	To be an equivalence relation, we need three condtions.
+
+	$$
+	\begin{cases}
+		a \sim a \\ 
+		a \sim b \iff b \sim a\\
+		a \sim b \land b \sim c \implies a \sim c
+	\end{cases}
+	$$
+
+	It is very clear that $a \sim a$ because by the definitions of a function $f$, $f(a)=f(a)$.
+
+	If $f(a)=f(b)$ then $f(b)=f(a)$ so $a \sim b \implies b \sim a$.
+
+	$f(a)=f(b)\land f(b)=f(c)\implies f(a)=f(c)$, so $a \sim b \land b \sim c \implies a \sim c$.
+
+	We know that the fibers of element $y$ are $\left\{ x \in X : f(x) = y \right\}$.
+	Therefore, it is very clear that if $a \sim b$, then a,b are in the fibers of $f(a)$.
+\end{proof}
+
+\section*{1.2.3}
+
+\begin{proof}
+	$s^k$ has order 2 because $s^{2k}=(s^2)^k=1^k=1$.
+	$sr^ksr^k=sr^{k-1}sr^{-1}r^k=sr^{k-1}sr^{k-1}$ so we can reduce to the case $s^2$ which is $1$.
+
+	To prove that $s,sr$ can generate $D_{2n}$, we need to show that $r$ ($s$ is trivial) can be written as combination of $s$ and $sr$.
+	This is trivial by compose $s$ and $sr$ which results in $r$.
+\end{proof}
+
+\section*{1.2.4}
+
+\begin{proof}
+	If $n=2k$ is even, $k$ is an integer. 
+
+	For all element that are generated as power of $r$, it is very clear that it is commute with $r^k$\dots
+
+	It is very clear that $(r^k)^2=r^n=1$. Therefore, $r^kr^{-k}=1=r^k \implies r^k=r^{-k}$.
+
+	$zs=r^ks=r^{k-1}sr^{-1}=sr^{-k}=sr^k=sz$.
+
+	Suppose an element $l=r^is^j$ that commute with all element in $D_{2n}$.
+
+	It suffics to check two thing $(rl=lr, sl=ls)$.
+
+	$$
+	lr=rl \implies r^is^jr = rr^is^j \implies s^jr = rs^j
+	$$
+
+	$$
+	\begin{cases}
+		j \mod 2 = 0 \implies r = r \\ 
+		j \mod 2 = 1 \implies sr = rs = sr^{-1} \implies r = r^{-1} (\text{contradiction})
+	\end{cases}
+	$$
+
+	Therefore $j=0$.
+
+	$$
+	ls=sl \implies r^i s^j s = s r^i s^j \implies r^i s = s r^j \implies sr^{-i} = sr^{i} \implies r^{-i} = r^{i} \implies r^i r^i = r^i r^{-i} = 1
+	$$
+
+	Therefore $i=\frac{n}{2}$ since we assume $n$ is even.
+
+\end{proof}
+
+\section*{1.2.18}
+
+\begin{enumerate}
+	\item $v^3=1 \implies v^2 v = 1 \implies v^2 v = v^{-1} v \implies v^2 = v^{-1}$
+	\item $(v^2 u^2) (uv) = (v^2 u^2) (v^2 u^2) = (uv) (v^2 u^2) = u v^3 u^2 = u^3$
+	
+		$v^2u^3v = u^3 = v^{-1} u^3 v = u^3 \implies u^3 v = v u^3$
+	\item $u^4 = 1 \implies u^8 = 1 \implies u^8 u = u$. From before, $vu = v u^3 u^3 u^3 = u^3 v u^3 u^3 = u^3 u^3 u^3 v = u^9 v = uv$
+	\item $vu = uv = v^2u^2 \implies u = vu^2 \implies 1 = vu = uv$
+	\item $u^4v^3 = 1 = uv uv uv u = u \implies 1v=1 \implies v=1$
+\end{enumerate}
+
+\section*{1.3.1}
+
+$$
+\sigma = (1\ 3\ 5) (2\ 4)
+$$
+
+$$
+\tau = (1\ 5)(2\ 3)
+$$
+
+$$
+\sigma^2 = (1 5 3)
+$$
+
+$$
+\sigma \tau = (1)(2\ 5\ 3\ 4)
+$$
+
+$$
+\tau \sigma = (1\ 2\ 4\ 3) (5)
+$$
+
+$$
+\tau^2 \sigma = \sigma = (1\ 3\ 5) (2\ 4)
+$$
+
+\section*{1.3.5}
+
+\begin{proof}
+	The order should be the gcd of the count of elements in each cycle group.
+
+	$$
+	\operatorname{gcd}(5,2,3,2) = 30
+	$$
+
+\end{proof}
+
+
+\end{document}
+
+
+
+
+
