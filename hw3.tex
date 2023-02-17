@@ -282,16 +282,152 @@ Sec. 2.1: 3
 	Proof by contradiction
 
 	Assume the solution exists.
-	
+
 	We know that $a^2+b^2 \mod 4 \neq 3$, so $c^2 \mod 4 \neq 1$, which means $c^2 \mod 4=0$
 
 	Also we know that $a^2\mod 4 < 2$, and we know that $c^2 \mod 4 = 0$.
-	
+
 	Therefore, $(a^2 + b^2) \mod 4 = 0$
 
 	Therefore $a^2 \mod 4 = b^2 \mod 4 = 0$.
 
+	Therefore, $\frac{a^2}{4}, \frac{b^2}{4}, \frac{c^2}{4} \in \Z$.
 
+	Therefore, $\frac{a^2}{4}, \frac{b^2}{4}, \frac{c^2}{4}$ satisfy the same constraint,
+	so we can contiuously divide out by 4, and the equation still satisfy.
+
+	However, it is impossible for $a^2, b^2, c^2$ to have infinite many factor of $4$, which is a contradiction.
+
+\end{proof}
+
+\section*{1.7.18}
+
+\begin{proof}
+	\begin{enumerate}
+		\item Reflexivity. This is true because $\one \in H$, and $\one a = a$
+		\item Symmetry. This is true because inverse.
+		      $$
+			      a \sim b \implies \exists h : ha=b \implies h^{-1} b = a
+		      $$
+
+		      The argument is symmetric so the other side is the same.
+
+		\item transitivity. This is true because group is closed.
+		      $$
+			      a \sim b, b \sim c \implies \exists h_1,h_2 : h_1a=b, h_2b=c
+		      $$
+		      $$
+			      \implies h_2 h_1 a = c \implies \exists k = h_2 h_1 \in H : ka=c \implies a \sim c
+		      $$
+	\end{enumerate}
+\end{proof}
+
+\section*{1.7.19}
+
+\subsection*{Bijection}
+
+\begin{proof}
+	Proof of Injective by contradiction
+
+	Suppose $\exists h_1,h_2 : h_1 \neq h_2 \land h_1x\equiv h_2x$,
+	because $\exists x^{-1} : h_1x x^{-1} = h_2x x^{-1} = h_1 = h_2$, which is a contradtion.
+
+	Proof of surjective
+
+	There's nothing to be proved here because by definition $\forall o \in \mathcal{O} : \exists h : hx = o$.
+
+\end{proof}
+
+\subsection*{Lagrange's Theorem}
+
+\begin{proof}
+	From the preceding exercise we know that by applying $h$ to the element, we can define an equivalence relation.
+
+	Therefore, we can see that $\mathcal{O}_x$ will define a partition of $G$.
+
+	Further we know that $\forall x,y \in G \land \mathcal{O}_x \neq \mathcal{O}_y: |\mathcal{O}_x|=|\mathcal{O}_y|=|H|$.
+
+	Because $\mathcal{O}$ is a partition, so $|G|=\sum\limits_{x}^{} \mathcal{O}_x$,
+	combining the previous two statement, $\exists u \in \Z : |G| = u|\mathcal{O}| \implies |G|=u|H|$.
+\end{proof}
+
+\section*{2.1.3}
+\subsection*{a}
+
+\begin{proof}
+	Check closed under inversion.
+
+	\[
+		r^4 = \one \implies r^2r^2 = \one \implies r^2 = {(r^2)}^{-1}
+	\]
+
+	\[
+		s^2 = \one \implies s=s^{-1}
+	\]
+
+	\[
+		(sr^2)^2 = sr^2sr^2 = sr^2r^{-2}s=ss=\one \implies sr^2 = (sr^2)^{-1}
+	\]
+
+	Closed under multiplcation (skip some trivial cases)
+
+	\[
+		r^2s=r^2s = r^{-2} s = sr^2
+	\]
+
+	\[
+		r^2 sr^2 = sr^{-2}r^2 = s
+	\]
+
+	\[
+		sr^2r^2=s\one=s
+	\]
+
+	\[
+		ssr^2 = r^2
+	\]
+
+	\[
+		sr^2s=ssr^{-2}=r^{-2}=r^{2}
+	\]
+\end{proof}
+
+\subsection*{b}
+
+\begin{proof}
+	Close under inversion:
+
+	$r^2$ has been checked before
+
+	\[
+		srsr=srr^{-1}s=\one
+	\]
+
+	\[
+		sr^3sr^3=sr^3r^{-3}s=\one
+	\]
+
+	Close under multiplcation (skip trivial)
+
+	\[
+		r^2 sr = r^2r^{-1}s=rs=sr^{-1}=sr^3
+	\]
+
+	\[
+		r^2sr^3=r^{-1}s=sr
+	\]
+
+	\[
+		sr^3r^2=sr^5=sr
+	\]
+
+	\[
+		srsr^3=srr^{-3}s=sr^-2s=s^2r^2=r^2
+	\]
+
+	\[
+		sr^3sr=sr^3r^{-1}s=sr^2s=ssr^{-2}=r^{-2}=r^2
+	\]
 \end{proof}
 
 \end{document}
