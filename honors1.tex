@@ -183,6 +183,7 @@
 
 
 \newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
 
 %: TITLE
 
@@ -222,14 +223,37 @@ To find a matrix inverse, we can use the following algorithm:
 	\item The inverse of the original matrix is the matrix we get from the elementary row operation matrix product.
 \end{enumerate}
 
-We know that $I$ can be written as $A^{0}$,
-if we can represent all the row operation needed to reduce $S \in SL_2(\Z)$ to $I$,
-then we can represent $S^{-1}$ as $A^{0}A^{1}A^{2}...A^{n}$,
-where $A^{i}$ is the elementary row operation matrix,
+
+If we can represent all the row operation needed to reduce $S \in SL_2(\Z)$ to $I$,
+then we can represent $S^{-1}$ as $E^{0}E^{1}E^{2}...E^{n}$,
+where $E^{i}$ is the elementary row operation matrix,
 which means we can reproduce $S$.
 
+Then if we can represent the elementary row operation matrix we need to reduce \(S\) to \(I\)
+as a composition of \(A,B\), we can find \(S^{-1}\) by composition of \(A,B\), which means we can reproduce \(S\) with \(A,B\).
+
+There are four types of \(E\), which is 
+\[
+	E_1 = \begin{bmatrix}
+		1 & k \\
+		0 & 1
+	\end{bmatrix}, \quad
+	E_2 = \begin{bmatrix}
+		1 & 0 \\
+		k & 1
+	\end{bmatrix}, \quad
+	E_3 = \begin{bmatrix}
+		a & 0 \\
+		0 & 1
+	\end{bmatrix}, \quad
+	E_4 = \begin{bmatrix}
+		1 & 0 \\
+		0 & a
+	\end{bmatrix}
+\]
+
 \begin{lemma}
-	Row operation for adding $k \in \Z$ times the bottom row to the top row can be represented as $A^{k}$.
+	Row operation for adding $k \in \Z$ times the bottom row to the top row can be represented as $A^{k}$. (i.e. \(E_1\))
 \end{lemma}
 
 \begin{proof}
@@ -237,15 +261,15 @@ which means we can reproduce $S$.
 \end{proof}
 
 \begin{lemma}
-	Row operation for adding $k \in \Z$ times the top row to the bottom row by $k$ can be represented as $B^{-3}A^{-k}B$.
+	Row operation for adding $k \in \Z$ times the top row to the bottom row by $k$ can be represented as $B^{3}A^{-k}B$. (i.e. \(E_2\))
 \end{lemma}
 
 \begin{proof}
 	\begin{align*}
-		B^{-3}A^{-k}B & = \begin{bmatrix}
+		B^{3}A^{-k}B & = \begin{bmatrix}
 			                  0 & -1 \\
 			                  1 & 0  \\
-		                  \end{bmatrix}^{-3}  \begin{bmatrix}
+		                  \end{bmatrix}^{3}  \begin{bmatrix}
 			                                      1 & 1 \\
 			                                      0 & 1 \\
 		                                      \end{bmatrix}^{-k}\begin{bmatrix}
@@ -257,7 +281,7 @@ which means we can reproduce $S$.
 	through matrix multiplication
 
 	\begin{align*}
-		B^{-3}A^{-k}B & = \begin{bmatrix}
+		B^{3}A^{-k}B & = \begin{bmatrix}
 			                  1 & 0 \\
 			                  k & 1
 		                  \end{bmatrix} \\
@@ -266,7 +290,7 @@ which means we can reproduce $S$.
 	which means
 
 	\begin{align*}
-		B^{-3}A^{-k}B\begin{bmatrix}
+		B^{3}A^{-k}B\begin{bmatrix}
 			             a & b \\
 			             c & d
 		             \end{bmatrix} & = \begin{bmatrix}
@@ -276,24 +300,154 @@ which means we can reproduce $S$.
 	\end{align*}
 \end{proof}
 
-Then what we need to show is we can reduce to $I$ without scaling multiplication of a row.
+\begin{theorem}
+	Nontrivial (i.e. \(a\neq 1\)) \(E_3, E_4\) is not possible in \(SL_2(\Z)\).
+\end{theorem}
+\begin{proof}
+	If we have \(E_3, E_4\), we will change the determinant of the matrix by \(a\),
+	which means the space is not closed.
+	
+\end{proof}
 
-By lemma \ref{lem1}, we know that $a,b,c,d$ are coprime.
 
-Therefore, $\operatorname{gcd}(a,c)=1$.
+\begin{theorem}
+	We can reduce any matrix in \(SL_2(\Z)\) to \(I\) by using \(E_1, E_2\)
+\end{theorem}
 
-If we do row operation following the Euclidean algorithm,
-we are guaranteed to reduce $a,c$ to be $1$.
-Then, if we do one more time, we can make $c$ to be $0$.
+\begin{proof}
+	By lemma \ref{lem1}, we know that $a,b,c,d$ are coprime.
 
-We know that $ad-bc=1$, with $c=0, a=1$, we can get $d=1$.
+	Therefore, $\operatorname{gcd}(a,c)=1$.
 
-Therefore, by subtracting the bottom row from the top row the remaining $b$ times,
-we can get $I$.
+	If we do row operation following the Euclidean algorithm,
+	we are guaranteed to reduce $a,c$ to be $1$.
+	Then, if we do one more time, we can make $c$ to be $0$.
+
+	The operation will be \(\max(a,c)=\max(a,c)-\min(a,c)\).
+
+	We know that $ad-bc=1$, with $c=0, a=1$, we can get $d=1$.
+
+	Therefore, by subtracting the bottom row from the top row the remaining $b$ times,
+	we can get $I$.
+\end{proof}
+
 
 Therefore, we can reduce $S$ to $I$, which means $A,B$ can 
-formulate $S^{-1}$ by multiplication and inversion, 
-which by one more inverse, we can get $S$.
+	formulate $S^{-1}$ by multiplication and inversion, 
+	which by one more inverse, we can get $S$.
+
+\section*{Examples}
+
+\begin{exercise}{1}
+	Find the inverse of the following matrix.
+	\begin{align*}
+		C = \begin{bmatrix}
+			    2 & 3 \\
+			    1 & 2
+		    \end{bmatrix}
+	\end{align*}
+
+	The first step is to reduce 1 bottom row from the top row by multiplying \(A^{-1}\)
+	
+	\begin{align*}
+		A^{-1}C = \begin{bmatrix}
+			    1 & 1 \\
+			    1 & 2
+		    \end{bmatrix}
+	\end{align*}
+
+	Then apply \(B^{3}AB\)
+
+	\begin{align*}
+		B^{3}ABA^{-1}C = \begin{bmatrix}
+			    1 & 1 \\
+			    0 & 1
+		    \end{bmatrix}
+	\end{align*}
+
+	Then we can remove the 1 times the bottom row from the top row by multiplying \(A^{-1}\)
+
+	\begin{align*}
+		A^{-1}B^{3}ABA^{-1}C = \begin{bmatrix}
+			    1 & 0 \\
+			    0 & 1
+		    \end{bmatrix}
+	\end{align*}
+
+	Therefore, the inverse of $C$ is $A^{-1}B^{3}ABA^{-1}$.
+
+	which means \(C=(A^{-1}B^{3}ABA^{-1})^{-1}\).
+
+\end{exercise}
+
+\begin{exercise}{2}
+	\[
+		D=\begin{bmatrix}
+			1 & 0 \\
+			1 & 1
+		\end{bmatrix}
+	\]
+
+	We just need to let the second row subtract first row once.
+
+	\begin{align*}
+		B^{3}ABD = \begin{bmatrix}
+			1 & 0 \\
+			0 & 1
+		\end{bmatrix}
+	\end{align*}
+
+	Then \(B^3AB=D^{-1}\implies (B^3AB)^{-1}=D\)
+\end{exercise}
+
+\begin{exercise}{3}
+	\[
+	E=\begin{bmatrix}
+		3 & 5 \\
+		4 & 7
+	\end{bmatrix}
+	\]
+
+	First we will let the second row subtract the first row once.
+
+	\begin{align*}
+		B^{3}ABE = \begin{bmatrix}
+			3 & 5 \\
+			1 & 2
+		\end{bmatrix}
+	\end{align*}
+
+	Then we will let the first row subtract the second row twice.
+
+	\begin{align*}
+		A^{-2}B^{3}ABE = \begin{bmatrix}
+			1 & 1 \\
+			1 & 2
+		\end{bmatrix}
+	\end{align*}
+
+	Then we will let the second row subtract the first row once.
+
+	\begin{align*}
+		B^{3}ABA^{-2}B^{3}ABE = \begin{bmatrix}
+			1 & 1 \\
+			0 & 1
+		\end{bmatrix}
+	\end{align*}
+
+	Then we will let the first row subtract the second row once.
+
+	\begin{align*}
+		A^{-1}B^{3}ABA^{-2}B^{3}ABE = \begin{bmatrix}
+			1 & 0 \\
+			0 & 1
+		\end{bmatrix}
+	\end{align*}
+
+
+	Therefore, \(E=(A^{-1}B^{3}ABA^{-2}B^{3}AB)^{-1}\)
+\end{exercise}
+
 
 \qed
 
