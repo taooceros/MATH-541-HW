@@ -252,12 +252,25 @@ There are four types of \(E\), which is
 	\end{bmatrix}
 \]
 
-\begin{lemma}
+\begin{lemma}\label{lem2}
 	Row operation for adding $k \in \Z$ times the bottom row to the top row can be represented as $A^{k}$. (i.e. \(E_1\))
 \end{lemma}
 
 \begin{proof}
-	Proof is trivial so left as an exercise to the reader.
+	Proof by induction:
+
+	Base case is trivial so left as an exercise to reader.
+
+	Inductive Step: Given \(A^k=\begin{bmatrix} 
+			1 & k\\
+			0 & 1 
+	\end{bmatrix}\), we have \(A^{k+1}=A\begin{bmatrix} 
+			1 & k\\
+			0 & 1
+	\end{bmatrix}= \begin{bmatrix} 
+			1 & k+1\\
+			0 & 1 
+	\end{bmatrix} \)
 \end{proof}
 
 \begin{lemma}
@@ -266,38 +279,39 @@ There are four types of \(E\), which is
 
 \begin{proof}
 	\begin{align*}
-		B^{3}A^{-k}B & = \begin{bmatrix}
-			                  0 & -1 \\
-			                  1 & 0  \\
-		                  \end{bmatrix}^{3}  \begin{bmatrix}
-			                                      1 & 1 \\
-			                                      0 & 1 \\
-		                                      \end{bmatrix}^{-k}\begin{bmatrix}
-			                                                        0 & -1 \\
-			                                                        1 & 0  \\
-		                                                        \end{bmatrix} \\
+		\forall \begin{bmatrix} 
+			a & b\\
+			c & d 
+	\end{bmatrix} \in SL_2(\Z): B \begin{bmatrix} 
+				a & b\\
+				c & d 
+		\end{bmatrix} & = \begin{bmatrix} 
+			-c &-d\\
+			a & b 
+	\end{bmatrix} \\
 	\end{align*}
 
-	through matrix multiplication
+	By Lemma \ref{lem2}, After \(A^{-k}\), it becomes \(\begin{bmatrix} 
+		-c-ka &-d-kb\\
+		a & b 
+\end{bmatrix}\)
 
 	\begin{align*}
-		B^{3}A^{-k}B & = \begin{bmatrix}
-			                  1 & 0 \\
-			                  k & 1
-		                  \end{bmatrix} \\
+		\forall \begin{bmatrix} 
+			a & b\\
+			c & d 
+	\end{bmatrix} \in SL_2(\Z): B^3 \begin{bmatrix} 
+				a & b\\
+				c & d 
+		\end{bmatrix} & = \begin{bmatrix} 
+			c & d\\
+			-a & -b
+	\end{bmatrix} \\
 	\end{align*}
 
-	which means
+	Then we can get \(E_2\) by composition of \(B^3A^{-k}B\)
 
-	\begin{align*}
-		B^{3}A^{-k}B\begin{bmatrix}
-			             a & b \\
-			             c & d
-		             \end{bmatrix} & = \begin{bmatrix}
-			                               a    & b    \\
-			                               ak+c & bk+d
-		                               \end{bmatrix} \\
-	\end{align*}
+
 \end{proof}
 
 \begin{theorem}
