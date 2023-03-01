@@ -253,7 +253,7 @@ Sec. 3.1: 2, 14, 22, 24, 36, 40, 41
 	\end{enumerate}
 \end{proof}
 
-\begin{exercise}{24}
+\begin{exercise}{22}
 	\begin{enumerate}[label=\emph{\alph*}]
 		\item \textsf{Prove that if \(H\) and \(K\) are normal subgroups of a group \(G\) then their intersection \(H \cap K\) is also a normal subgroup of \(G\).}
 		\item \textsf{Prove that the intersection of an arbitrary non-empty collection of normal subgroups of a group is a normal subgroup (do not assume the collection is countable).}
@@ -278,30 +278,79 @@ Sec. 3.1: 2, 14, 22, 24, 36, 40, 41
 	\end{enumerate}
 \end{proof}
 
-\begin{exercise}{36}
+\begin{exercise}{24}
 	\textsf{Prove that if \(N \trianglelefteq G\) and \(H\) is any subgroup of \(G\) then \(N \cap H \trianglelefteq H\).}
 \end{exercise}{}
 
 \begin{proof}
-	By definition: $\forall g \in G: gN=Ng \implies \forall h \in H: hN=Nh$. Then, follow last question, we can conclude that $N \cap H \trianglelefteq H$.
+	By definition: $\forall g \in G: gN=Ng \implies \forall h \in H: hN=Nh$.
+	Because $H$ is always normal under $H$.
+	Then, follow last question, we can conclude that $N \cap H \trianglelefteq H$.
 \end{proof}
 
-\begin{exercise}{40}
+\begin{exercise}{36}
 	Prove that if \(G/Z(G)\) is cyclic then \(G\) is abelian. [If \(G/Z(G)\) is cyclic with generator \(xZ(G)\), show that every element of \(G\) can be written in the form \(x^{a}z\) for some integer \(a \in \mathbb{Z}\) and some element \(z \in Z(G)\).]
 \end{exercise}{}
 
 \begin{proof}
-	
+	By definition, $Z(G) = \left\{ z \in G | zg = gz \right\}$.
+
+	If ${G} / Z(G)$ is cyclic, we can write it with one generator $xZ(G)$, which means
+	we can write every element as $x^aZ(G)^a=x^aZ(G)$.
+	By definition of quotient group equivalent class,
+	\[
+		\forall g \in G: \exists a \in \Z, z \in Z(G) : g = x^az
+	\]
+
+	\[
+		\forall g_1,g_2 \in G: g_1g_2 = x^{a_1}z_1x^{a_2}z_2 = z_1x^{a_1}x^{a_2}z_2=z_1x^{a_1+a_2}z_2=z_1z_2x^{a_1+a_2}=z_2z_1x^{a_2}x^{a_1}=z_2x^{a_2}z_1x^{a_1}=g_2g_1
+	\]
 \end{proof}
 
-\begin{exercise}{41}
+\begin{exercise}{40}
 	\textsf{Let \(G\) be a group, let \(N\) be a normal subgroup of \(G\) and let \(\overline{G} = G/N\). Prove that \(\overline{x}\) and \(\overline{y}\) commute in \(\overline{G}\) if and only if \(x^{-1}y^{-1}xy \in N\). (The element \(x^{-1}y^{-1}xy\) is called the commutator of \(x\) and \(y\) and is denoted by \([x, y]\).)}
 \end{exercise}{}
 
-\begin{exercise}{}
+\begin{proof}
+	$\impliedby$
+
+	\[
+		x^{-1}y^{-1}xy \in N \implies x \sim y^{-1}xy \implies yy^{-1}xy = yx = xy
+	\]
+
+	$\implies$
+
+	If $\overline{x}\overline{y}=\overline{y}\overline{x}$
+
+	\[
+		\forall x,y \in \overline{x}\overline{y} :xy=yx \implies x^{-1}y^{-1}xy=\one \implies x^{-1}y^{-1}xy \in N
+	\]
+\end{proof}
+
+\begin{exercise}{41}
 	\textsf{Let \(G\) be a group. Prove that \(N = \langle x^{-1}y^{-1} xy | x, y \in G \rangle\) is a normal subgroup of \(G\) and \(G / N\) is abelian (\(N\) is called the commutator subgroup of \(G\))}
 \end{exercise}{}
 
+\begin{proof}
+	Subgroup:
+	\[
+		x_1^{-1}y_1^{-1}x_1y_1x_2^{-1}y_2^{-1}x_2y_2 = (x_1y_1)^{-1}(x_1y_1)^{-1^{-1}}((x_2y_2)^{-1})(x_2y_2)
+	\]
+
+	Therefore, it is closed under multiplicative. Inverse is trivial.
+
+	Therefore, $N$ is a subgroup of $G$.
+
+	Normal:
+
+	\[
+		\forall g \in G: \forall x,y \in G: gx^{-1}y^{-1}xyg^{-1}=(g^{-1}x)^{-1}y^{-1}x(yg^{-1}) \in N
+	\]
+
+	G/N is abelian:
+
+	This is obvious given question 40.
+\end{proof}
 
 \end{document}
 
