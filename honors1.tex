@@ -1,0 +1,306 @@
+%: CLASS FILE
+
+\documentclass[11pt]{article}
+%\documentclass[11pt,reqno]{amsart} % AMS article style with right equation numbering
+
+
+%: PACKAGES
+
+\usepackage{graphicx}
+
+% sets margins
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+
+% gives more color definitions
+\usepackage{xcolor}
+
+% gives optional arguments to list environments
+\usepackage{enumitem}
+
+\usepackage{microtype}
+
+% uncomment to begin paragraphs with an empty line rather than an indent
+% \usepackage[parfill]{parskip}
+
+\usepackage{amsmath, amsthm, amssymb, tikz, mathtools, array, mathrsfs, tensor}
+
+% must be loaded after ams packages
+% gives various integral symbols: see http://ctan.math.illinois.edu/macros/latex/contrib/esint/esint.pdf
+\usepackage{esint}
+
+% creates command \one for blackboard 1 to use for indicator functions
+\usepackage{dsfont}
+	\newcommand{\one}{\mathds{1}}
+
+% \framebox{$ stuff $} will frame things in line.
+% \Aboxed{$ stuff $} will frame things in align environment.
+\usepackage{framed}
+
+% always have this as the last package listed.
+\usepackage{hyperref}
+	\hypersetup{hypertexnames=false,colorlinks=true,linkcolor=blue,citecolor=black,urlcolor=blue}
+	
+	
+%: SETTINGS
+
+% uncomment to align environments to be split over page breaks
+%\allowdisplaybreaks
+
+%: COMMANDS
+
+% equation shortcuts
+\newcommand{\eq}[1]{\begin{align*} #1 \end{align*}}
+\newcommand{\eeq}[1]{\begin{align} \begin{split} #1 \end{split} \end{align}}
+
+% shortcut for stacking equation references over relations
+% usage: \stackref{LABEL}{SYMBOL}
+\newcommand{\stackref}[2]{\stackrel{\mbox{\footnotesize{\eqref{#1}}}}{#2}}
+\newcommand{\stackrefp}[2]{\stackrel{\phantom{\mbox{\footnotesize{\eqref{#1}}}}}{#2}}
+
+% variable Greek letters
+\def\eps{\varepsilon}
+\def\vphi{\varphi}
+
+% blackboard letters
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\S}{\mathbb{S}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% calligraphic letters
+\renewcommand{\AA}{\mathcal{A}}
+\newcommand{\BB}{\mathcal{B}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\DD}{\mathcal{D}}
+\newcommand{\EE}{\mathcal{E}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\GG}{\mathcal{G}}
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\II}{\mathcal{I}}
+\newcommand{\JJ}{\mathcal{J}}
+\newcommand{\KK}{\mathcal{K}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\MM}{\mathcal{M}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\PP}{\mathcal{P}}
+\newcommand{\QQ}{\mathcal{Q}}
+\newcommand{\RR}{\mathcal{R}}
+\renewcommand{\SS}{\mathcal{S}}
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\UU}{\mathcal{U}}
+\newcommand{\VV}{\mathcal{V}}
+\newcommand{\WW}{\mathcal{W}}
+\newcommand{\XX}{\mathcal{X}}
+\newcommand{\YY}{\mathcal{Y}}
+\newcommand{\ZZ}{\mathcal{Z}}
+
+% script letters
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\BBB}{\mathcal{B}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\DDD}{\mathcal{D}}
+\newcommand{\EEE}{\mathcal{E}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\GGG}{\mathcal{G}}
+\newcommand{\HHH}{\mathcal{H}}
+\newcommand{\III}{\mathcal{I}}
+\newcommand{\JJJ}{\mathcal{J}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\LLL}{\mathcal{L}}
+\newcommand{\MMM}{\mathcal{M}}
+\newcommand{\NNN}{\mathcal{N}}
+\newcommand{\OOO}{\mathcal{O}}
+\newcommand{\PPP}{\mathcal{P}}
+\newcommand{\QQQ}{\mathcal{Q}}
+\newcommand{\RRR}{\mathcal{R}}
+\newcommand{\SSS}{\mathcal{S}}
+\newcommand{\TTT}{\mathcal{T}}
+\newcommand{\UUU}{\mathcal{U}}
+\newcommand{\VVV}{\mathcal{V}}
+\newcommand{\WWW}{\mathcal{W}}
+\newcommand{\XXX}{\mathcal{X}}
+\newcommand{\YYY}{\mathcal{Y}}
+\newcommand{\ZZZ}{\mathcal{Z}}
+
+% inner product 
+% usage: \iprod{left}{right}
+\newcommand{\iprod}[2]{\langle #1,\, #2\rangle}
+
+% bold math font (still in italics) 
+% usage: {\vc CONTENT}
+\newcommand{\vc}[1]{{\boldsymbol #1}}
+
+% widetilde and widehat shortcuts
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\wh}[1]{\widehat{#1}}
+
+% math operators with subcripts
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Ent}{Ent}
+
+% math operators with subtext
+\DeclareMathOperator*{\esssup}{ess\,sup}
+\DeclareMathOperator*{\essinf}{ess\,inf}
+
+% conditional statements (size of delimiter as an optional command)
+\newcommand{\givenc}[3][]{#1\{ #2 \: #1| \: #3 #1\}} % with braces
+\newcommand{\givenk}[3][]{#1[ #2 \: #1| \: #3 #1]} % with brackets
+\newcommand{\givenp}[3][]{#1( #2 \: #1| \: #3 #1)} % with parentheses
+\newcommand{\givena}[3][]{#1\langle #2 \: #1| \: #3 #1\rangle} % with angle brackets
+
+% common math text
+\DeclareMathOperator{\e}{e} % exponential
+\newcommand{\cc}{\mathrm{c}} % for set complements and "critical" subscripts
+\newcommand{\dd}{\mathrm{d}} % for differentials
+\newcommand{\Exp}{\mathrm{Exp}} % for exponential distribution
+
+% floor and ceiling functions
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+%: ENVIRONMENTS
+
+% exercise environment
+\newenvironment{exercise}[1]
+	{\noindent \textbf{#1:}}
+	{\par \vspace{0.5\baselineskip}}
+	
+% solution environment
+\newenvironment{solution}[1][\unskip]
+	{\noindent \textbf{Solution #1:} }
+	{\qed \pagebreak}
+	
+\newenvironment{solutionn}[1][\unskip]
+	{\noindent \textbf{Solution #1:} }
+	{\qed \\}	
+
+
+\newtheorem{lemma}{Lemma}
+
+%: TITLE
+
+\begin{document}
+\bibliographystyle{acm}
+
+\begin{center}
+	\framebox{\parbox{\linewidth}{\centering
+	{\bf{Honors 1}}\\
+	MATH 541: Abstract Algebra 1\\
+	Spring 2023 \\[\baselineskip]
+	{\sc Hongtao Zhang, Yibo Wu}}} %at \href{mailto:ewbates@wisc.edu}{\nolinkurl{ewbates@wisc.edu}}.}}
+\end{center}
+
+
+%: BODY
+
+\begin{lemma}\label{lem1}
+	a,b,c,d are coprime.
+\end{lemma}
+
+\begin{proof}
+	Assume they are not coprime,
+	without loss of generality, let $\operatorname{gcd}(a,c)=k$
+
+	\[
+		(ad-bc)=k(ld-nb) =1 \implies k=1
+	\]
+\end{proof}
+
+We can tackle this problem by utilizing the algorithm of finding a matrix inverse.
+To find a matrix inverse, we can use the following algorithm:
+
+\begin{enumerate}
+	\item Do row operation to make the matrix into an upper triangular matrix.
+	\item Do row operation to make the matrix into an identity matrix.
+	\item The inverse of the original matrix is the matrix we get from the elementary row operation matrix product.
+\end{enumerate}
+
+We know that $I$ can be written as $A^{0}$,
+if we can represent all the row operation needed to reduce $S \in SL_2(\Z)$ to $I$,
+then we can represent $S^{-1}$ as $A^{0}A^{1}A^{2}...A^{n}$,
+where $A^{i}$ is the elementary row operation matrix,
+which means we can reproduce $S$.
+
+\begin{lemma}
+	Row operation for adding $k \in \Z$ times the bottom row to the top row can be represented as $A^{k}$.
+\end{lemma}
+
+\begin{proof}
+	Proof is trivial so left as an exercise to the reader.
+\end{proof}
+
+\begin{lemma}
+	Row operation for adding $k \in \Z$ times the top row to the bottom row by $k$ can be represented as $B^{-3}A^{-k}B$.
+\end{lemma}
+
+\begin{proof}
+	\begin{align*}
+		B^{-3}A^{-k}B & = \begin{bmatrix}
+			                  0 & -1 \\
+			                  1 & 0  \\
+		                  \end{bmatrix}^{-3}  \begin{bmatrix}
+			                                      1 & 1 \\
+			                                      0 & 1 \\
+		                                      \end{bmatrix}^{-k}\begin{bmatrix}
+			                                                        0 & -1 \\
+			                                                        1 & 0  \\
+		                                                        \end{bmatrix} \\
+	\end{align*}
+
+	through matrix multiplication
+
+	\begin{align*}
+		B^{-3}A^{-k}B & = \begin{bmatrix}
+			                  1 & 0 \\
+			                  k & 1
+		                  \end{bmatrix} \\
+	\end{align*}
+
+	which means
+
+	\begin{align*}
+		B^{-3}A^{-k}B\begin{bmatrix}
+			             a & b \\
+			             c & d
+		             \end{bmatrix} & = \begin{bmatrix}
+			                               a    & b    \\
+			                               ak+c & bk+d
+		                               \end{bmatrix} \\
+	\end{align*}
+\end{proof}
+
+Then what we need to show is we can reduce to $I$ without scaling multiplication of a row.
+
+By lemma \ref{lem1}, we know that $a,b,c,d$ are coprime.
+
+Therefore, $\operatorname{gcd}(a,c)=1$.
+
+If we do row operation following the Euclidean algorithm,
+we are guaranteed to reduce $a,c$ to be $1$.
+Then, if we do one more time, we can make $c$ to be $0$.
+
+We know that $ad-bc=1$, with $c=0, a=1$, we can get $d=1$.
+
+Therefore, by subtracting the bottom row from the top row the remaining $b$ times,
+we can get $I$.
+
+Therefore, we can reduce $S$ to $I$, which means $A,B$ can 
+formulate $S^{-1}$ by multiplication and inversion, 
+which by one more inverse, we can get $S$.
+
+\qed
+
+
+\end{document}
+
+
+
+
+
