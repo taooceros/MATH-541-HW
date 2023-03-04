@@ -237,7 +237,7 @@ Sec. 3.1: 2, 14, 22, 24, 36, 40, 41
 			      \forall q \in \Q/\Z, \exists z_1,z_2 \in \Z: q = \frac{z_1}{z_2}
 		      \]
 
-		      Therefore, the order is $\operatorname{lcm} (z_1,z_2)$, which can be arbitrarily large but finite.
+		      Therefore, the order is $(\operatorname{lcm} (z_1,z_2))/z_1$, which can be arbitrarily large but finite.
 
 		\item It suffices to show $\Q/\Z$ is a subgroup $\R/\Z$ with $b$.
 		      We know that the sum of two rational number is a rational number.
@@ -274,7 +274,7 @@ Sec. 3.1: 2, 14, 22, 24, 36, 40, 41
 		      \[
 			      \forall l \in L: glg^{-1} \in H, glg^{-1} \in K \implies glg^{-1} \in L
 		      \]
-		\item There're no difference between the two argument, but just suggesting the element is in all normal subgroups instead of $H,K$.
+		\item There are no difference between the two argument, but just suggesting the element is in all normal subgroups instead of $H,K$.
 	\end{enumerate}
 \end{proof}
 
@@ -289,7 +289,7 @@ Sec. 3.1: 2, 14, 22, 24, 36, 40, 41
 \end{proof}
 
 \begin{exercise}{36}
-	Prove that if \(G/Z(G)\) is cyclic then \(G\) is abelian. [If \(G/Z(G)\) is cyclic with generator \(xZ(G)\), show that every element of \(G\) can be written in the form \(x^{a}z\) for some integer \(a \in \mathbb{Z}\) and some element \(z \in Z(G)\).]
+	Prove that if \(G/Z(G)\) is cyclic then \(G\) is Abelian. [If \(G/Z(G)\) is cyclic with generator \(xZ(G)\), show that every element of \(G\) can be written in the form \(x^{a}z\) for some integer \(a \in \mathbb{Z}\) and some element \(z \in Z(G)\).]
 \end{exercise}{}
 
 \begin{proof}
@@ -334,7 +334,7 @@ Sec. 3.1: 2, 14, 22, 24, 36, 40, 41
 \begin{proof}
 	Subgroup:
 	\[
-		x_1^{-1}y_1^{-1}x_1y_1x_2^{-1}y_2^{-1}x_2y_2 = (x_1y_1)^{-1}(x_1y_1)^{-1^{-1}}((x_2y_2)^{-1})(x_2y_2)
+		\forall n,m \in \Z: x_1^{-n}y_1^{-n}x_1y_1x_2^{-m}y_2^{-m}x_2y_2 = (x_1y_1)^{-n}(x_1y_1)^{-1^{-n}}((x_2y_2)^{-m})(x_2y_2)^m
 	\]
 
 	Therefore, it is closed under multiplicative. Inverse is trivial.
@@ -343,11 +343,27 @@ Sec. 3.1: 2, 14, 22, 24, 36, 40, 41
 
 	Normal:
 
+	Given Lemma, \(g^{-1}\langle S \rangle g = \langle g^{-1} S g \rangle\), it suffices to prove the \(S\) is normal.
+
 	\[
-		\forall g \in G: \forall x,y \in G: gx^{-1}y^{-1}xyg^{-1}=(g^{-1}x)^{-1}y^{-1}x(yg^{-1}) \in N
+		\forall g \in G: \forall x,y \in G: g(x^{-1}y^{-1}xy)g^{-1} = (gx^{-1}g^{-1})(gy^{-1}g^{-1})(gxg^{-1})(gyg^{-1})
 	\]
 
-	G/N is abelian:
+	\[
+		(gx^{-1}g^{-1})(gy^{-1}g^{-1})(gxg^{-1})(gyg^{-1}) = (gxg^{-1})^{-1}(gyg^{-1})^{-1}(gxg^{-1})(gyg^{-1}) \in N
+	\]
+
+	We can prove the lemma by following:
+
+	Given \(g^{-1}Sg=S\), want to show \(g^{-1}S^ng\)
+
+	\[
+		g^{-1}S^ng = g^{-1}S^{n-1}Sg=g^{-1}S^{n-1}gg^{-1}Sg=g^{-1}S^{n-1}g
+	\]
+
+	By induction, we can see that it is equivalent.
+
+	G/N is Abelian:
 
 	This is obvious given question 40.
 \end{proof}
