@@ -319,26 +319,14 @@ Section 3.3: 3, 4, 7, 9, 10
 
 \begin{solution}
 	It suffices to show that $(M \cap N)$ is the kernel of
-	a morphism from $G \to (G / M) \times (G / N)$, by firstly send
-	$g \in G$ to $(gM, gN)$.
-
-	Then it is very clear that $M \cap N$ is the kernel of this map.
+	a morphism from $G \to (G / M) \times (G / N)$, by send
+	$g \in G$ to $(gM, gN)$, which is clear.
 
 	It is also clear that $M\cap N$ is the kernel of the morphism from $G$ to $G/(M \cap N)$.
 
 	Because we know that both morphisms are surjective, we know that they are isomorphic.
 
 \end{solution}
-
-\begin{theorem}
-	\begin{enumerate}
-		\item $A \le B \iff \overline{A} \le \overline{B}$
-		\item $A \le B \implies |B:A| = |\overline{B} : \overline{A}|$
-		\item $\overline{\iprod{A}{B}} = \iprod{\overline{A}}{\overline{B}}$
-		\item $\overline{A \cap B} = \overline{A}\cap \overline{B}$
-		\item $A \trianglelefteq G \iff \overline{A} \trianglelefteq \overline{G}$.
-	\end{enumerate}
-\end{theorem}
 
 \begin{exercise}{9}
 	Let $p$ be a prime and let $G$ be a group of order $p^am$,
@@ -411,21 +399,21 @@ Section 3.3: 3, 4, 7, 9, 10
 	In the previous question, we only use the fact
 	that $p^a$ is relatively prime to $m \AND n$.
 
-	Therefore, it suffices to write the order of $G$ as $x^ay$,
-	where $x$ and $y$ are relatively prime, and $|H| = x^a$,
-	and $|N| = x^bn$.
+	Therefore, it suffices to write the order of $G$ as $xy$,
+	where $x$ and $y$ are relatively prime, and $|H| = x$,
+	and $|N| = an$ where $\operatorname{gcd}(a,n)=1$ and $x\backslash a, y\backslash n$.
 
 	Then, we know that $|G:H| = y$.
 
-	By previous question we know that $|H \cap N| = x^b$,
-	and $|HN / N| = x^{a-b}$.
+	By previous question we know that $|H \cap N| = \frac{x}{a}$,
+	and $|HN / N| = \frac{x}{a}$.
 
 	Then it is clear that $H \cap N \leqslant N$ is a 
 	Hall subgroup of $N$.
 
-	Similarly, $|G / N| = x^{a-b} \frac{y}{n}$,
+	Similarly, $|G / N| = \frac{x}{a} \frac{y}{n}$,
 	which means that $HN / N$ is a Hall subgroup of $G / N$
-	because $\frac{y}{n}$ will also be relatively prime to $x^{a-b}$.
+	because $\frac{y}{n}$ will also be relatively prime to $\frac{x}{a}$.
 \end{solution}
 
 \end{document}
