@@ -242,7 +242,7 @@ Section 3.3: 3, 4, 7, 9, 10
 	\]
 
 	\[
-	  |G : H| = p = {|G : HK|}{|HK : H|}
+		|G : H| = p = {|G : HK|}{|HK : H|}
 	\]
 
 	Because $HK \le G \AND H \le HK$, both upper side and lower side is integer.
@@ -350,10 +350,82 @@ Section 3.3: 3, 4, 7, 9, 10
 \end{exercise}
 
 \begin{solution}
-	By isomorphism theorem 2,
-	we have $P \cap N$ is a normal subgroup of $G$.
+	By second isomorphism theorem,
 
-	We also have $(SN) / N \cong S / (S\cap N)$
+	\[
+		\frac{PN}{N} \cong \frac{P}{P \cap N}
+		\implies \frac{(|PN|)}{(|N|)} = \frac{(|P|)}{(|P \cap N|)}
+	\]
+
+	We also know that $P \cap N \le N,P$
+
+	Therefore,
+
+	\[
+		\begin{split}
+			\exists z_1 \in Z^+ : = \frac{(|N|)}{|(P \cap N)|} \\
+			\exists z_2 \in Z^+ : = \frac{(|P|)}{|(P \cap N)|} \\
+		\end{split}
+	\]
+
+	Therefore,
+
+	\[
+		\begin{split}
+			|N| = |P \cap N| \cdot z_1 \AND |P| = |P \cap N| \cdot z_2\\
+			\implies \frac{|P|}{|P \cap N|} = \frac{|PN|}{z_1|P \cap N|}
+			\implies z_1= |PN| / |P| = \frac{|PN|}{p^a} \\
+		\end{split}
+	\]
+
+	We know that $PN \leqslant G$ so $|PN| \leqslant |G| \AND |PN| \backslash |G|$.
+
+	Therefore,
+	\[
+		\exists x \in Z^+ : |PN| = p^ax \implies z_1 = x
+	\]
+
+	We also know that $N \leqslant PN \implies x \backslash n$.
+	However, $|N| \backslash x \implies n \backslash x \implies n=x$.
+
+	Therefore, $|PN| = p^an$.
+
+	Then, by second isomorphism theorem,
+
+	\[
+	\frac{|PN|}{|N|} = \frac{|P|}{|P \cap N|} = p^{a-b} \implies |P \cap N| = p^b
+	\]
+\end{solution}
+
+\begin{exercise}{10}
+	Generalize the preceding exercise as follows.
+
+	A subgroup $H$ of a finite group $G$ is called a \textit{Hall subgroup}
+	of $G$ if its index in G is relatively prime to the order of $H$ 
+	(i.e. $\operatorname{gcd}(|G:H|,|H|)=1$).
+	Prove that if $H$ is a Hall subgroup of $G$ and $N$ is a normal subgroup of $G$,
+	then $H \cap N$ is a Hall subgroup of $N$, and $HN/N$ is a Hall subgroup of $G / N$.
+\end{exercise}
+
+\begin{solution}
+	In the previous question, we only use the fact
+	that $p^a$ is relatively prime to $m \AND n$.
+
+	Therefore, it suffices to write the order of $G$ as $x^ay$,
+	where $x$ and $y$ are relatively prime, and $|H| = x^a$,
+	and $|N| = x^bn$.
+
+	Then, we know that $|G:H| = y$.
+
+	By previous question we know that $|H \cap N| = x^b$,
+	and $|HN / N| = x^{a-b}$.
+
+	Then it is clear that $H \cap N \leqslant N$ is a 
+	Hall subgroup of $N$.
+
+	Similarly, $|G / N| = x^{a-b} \frac{y}{n}$,
+	which means that $HN / N$ is a Hall subgroup of $G / N$
+	because $\frac{y}{n}$ will also be relatively prime to $x^{a-b}$.
 \end{solution}
 
 \end{document}
