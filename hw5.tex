@@ -128,6 +128,8 @@
 \newcommand{\YYY}{\mathcal{Y}}
 \newcommand{\ZZZ}{\mathcal{Z}}
 
+
+
 % inner product 
 % usage: \iprod{left}{right}
 \newcommand{\iprod}[2]{\langle #1,\, #2\rangle}
@@ -167,6 +169,11 @@
 
 %: ENVIRONMENTS
 
+%: And Or
+\newcommand{\AND}{\text{ and }}
+\newcommand{\OR}{\text{ or }}
+
+
 % exercise environment
 \newenvironment{exercise}[1]
 	{\noindent \textbf{#1:}}
@@ -181,6 +188,10 @@
 	{\noindent \textbf{Solution #1:} }
 	{\qed \\}	
 
+
+% theorem
+
+\newtheorem{theorem}{Theorem}
 
 %: TITLE
 
@@ -211,33 +222,36 @@ Section 3.3: 3, 4, 7, 9, 10
 \end{exercise}
 
 \begin{solution}
-	By Lagrange theorem,
+	Assume that $K \not\le H$
+
+	By second isomorphism theorem,
+
 	\[
-		|G:H| = \frac{|G|}{|H|} = p
+		\frac{K}{K \cap H} \cong \frac{HK}{H}
+		\implies |K:K \cap H| = |HK:H|
 	\]
 
-	Therefore, we know that $p$ is a factor of $|G|$.
-
-	By Lagrange theorem again,
+	If $K \le H$,
 	\[
-		K \le G \implies \exists k \in \Z \text{ s.t. } |G| = k|K|
+		|K:K \cap H| = |K:K| = 1 = |HK : H|
 	\]
 
-	Therefore, we can have two cases:
-
-	\begin{enumerate}
-		\item $\exists z \in \Z^+ : zp = k$	 \label{3case1}
-		\item $\exists z \in \Z^+ : zp = |K|$. \label{3case2}
-	\end{enumerate}
-
-	For \ref{3case1},
+	Otherwise,
 	\[
-		zp|K|=|G|=p|H| \implies z|K| = |H| \implies \frac{|H|}{|K|} = z \in \Z^+
+		\exists z > 1 \in Z^+ : |HK : H| = z
 	\]
 
-	We then have $|G:K| = |G:H|z$, which means that $     $
-	
+	\[
+	  |G : H| = p = {|G : HK|}{|HK : H|}
+	\]
 
+	Because $HK \le G \AND H \le HK$, both upper side and lower side is integer.
+
+	We also know that $HK > H \impliedby K \not\le H$,
+	so $|HK : H| \neq 1$,
+	which $\implies |G:HK|=1 \implies G = HK$\dots
+
+	Then $|K : K \cap H| = |HK : H| = p$.
 
 \end{solution}
 
@@ -248,6 +262,99 @@ Section 3.3: 3, 4, 7, 9, 10
 	Prove that $(C \times D) \trianglelefteq (A \times B)$ and
 	$(A \times B) / (C \times D) \cong (A / C) \times (B / D)$.
 \end{exercise}
+
+\begin{solution}
+	Proof of finite cases.
+
+	It is easy to see that $(C \times D) \trianglelefteq (A \times B)$,
+	by definition of normal subgroup.
+
+	\[
+		\forall (a,b) \in (A \times B) : \forall  c_1,d_1 \in C,D, \exists c_2, d_2 \in C,D :
+		(c_1a,d_1b) \in (C \times D) = (c_2a,d_2b) \in (C \times D)
+	\]
+
+	If $A,B,C,D$ is finite, the second statement follows directly from the Lagrange theorem.
+
+	Proof of infinite cases.
+
+	It follows from definition of how we construct quotient group.
+
+	We can write element in $(A \times B)/(C \times D)$	as $(a,b)(C \times D)$.
+
+	Then we have
+
+	Denote element in $A$ as $a$ or $a_i$, and mutatis mutandis for $B,C,D$.
+
+	Denote element in $A/C$ as $\overline{a}$ and mutatis mutandis for $B/D$, and $(A \times B) / (C \times D)$.
+
+	Claim: map
+	\[
+		\phi(\overline{(a, b)}) = (\overline{a}, \overline{b})
+	\]
+
+	is a bijection.
+
+	Proof of claim.
+
+	It is a bijection because it is a function from a set to itself.
+
+	\[
+		\begin{split}
+			& \forall (a,b) \in (A \times B) : \forall  c_1,d_1 \in C,D, \exists c_2, d_2 :
+			(c_1a,d_1b) \in (C \times D) = (c_2a,d_2b)\\
+			& \implies \forall (a,b) \in (A \times B) : \forall  c_1,d_1 \in C,D, \exists c_2, d_2 :
+			(c_1, d_1)(a,b) = (c_2, d_2)(a,b)\\
+		\end{split}
+	\]
+
+
+
+\end{solution}
+
+\begin{exercise}{7}
+	Let $M$ and $N$ be normal subgroups of $G$ such that $G=MN$.
+	Prove that $G / (M \cap N) \cong (G / M) \times (G / N)$.
+\end{exercise}
+
+\begin{solution}
+	It suffices to show that $(M \cap N)$ is the kernel of
+	a morphism from $G \to (G / M) \times (G / N)$, by firstly send
+	$g \in G$ to $(gM, gN)$.
+
+	Then it is very clear that $M \cap N$ is the kernel of this map.
+
+	It is also clear that $M\cap N$ is the kernel of the morphism from $G$ to $G/(M \cap N)$.
+
+	Because we know that both morphisms are surjective, we know that they are isomorphic.
+
+\end{solution}
+
+\begin{theorem}
+	\begin{enumerate}
+		\item $A \le B \iff \overline{A} \le \overline{B}$
+		\item $A \le B \implies |B:A| = |\overline{B} : \overline{A}|$
+		\item $\overline{\iprod{A}{B}} = \iprod{\overline{A}}{\overline{B}}$
+		\item $\overline{A \cap B} = \overline{A}\cap \overline{B}$
+		\item $A \trianglelefteq G \iff \overline{A} \trianglelefteq \overline{G}$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{exercise}{9}
+	Let $p$ be a prime and let $G$ be a group of order $p^am$,
+	where $p$ does not divide $m$.
+	Assume $P$ is a subgroup of $G$ of order $p^a$,
+	and $N$ is a normal subgroup of $G$ of order $p^bn$,
+	where $p$ does not divide $n$.
+	Prove that $|P \cap N| = p^b$ and $|PN / N| = p^{a-b}$.
+\end{exercise}
+
+\begin{solution}
+	By isomorphism theorem 2,
+	we have $P \cap N$ is a normal subgroup of $G$.
+
+	We also have $(SN) / N \cong S / (S\cap N)$
+\end{solution}
 
 \end{document}
 
